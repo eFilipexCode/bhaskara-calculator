@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Use esta simples ferramenta para cálculos
+    de equações do segundo grau utilizando a fórmula de bhaskara.">
+    <title>Fórmula de Bháskara Online</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="calculator" id="calculator">
+            <h1>Calculadora</h1>
+            <p>Para usar esta calculadora automática de bhaskara, insira os valores
+                correspondentes às variáveis <strong>A</strong>, <strong>B</strong> e <strong>C</strong>
+                nos campos abaixo. Logo após, clique no botão para ver passo a passo a resolução da equação
+                e o valor de <strong>XI e XII</strong>.
+            </p>
+            <p>Se quiser uma descrição e uma breve explicação da fórmula de bhaskara, <a href="#intro">clique aqui</a> 
+                para ler o conteúdo disponibilizado.
+            </p> 
+            <p>
+            <div class="calc-area">
+                <div class="inputs">
+                    <div>
+                        <span>A:</span>
+                        <input @input="checkInput" type="number" class="varA" v-model="varA">
+                    </div>
+                    <div>
+                        <span>B:</span>
+                        <input @input="checkInput" type="number" class="varB" v-model="varB">
+                    </div>
+                    <div>
+                        <span>C:</span>
+                        <input @input="checkInput" type="number" class="varC" v-model="varC">
+                    </div>
+                </div>
+                <span v-if="showResult" class="formula-delta">Δ = b² - 4.a.c</span>
+                <span v-if="showResult" class="formula-x">X = (-b ± √Δ) / 2.a</span>
+                <div class="result-area">
+                    <span v-if="!showResult">O resultado virá aqui.</span>
+                </div>
+                <div v-if="showResult && deltaPositivo" class="final-result">
+                    <h1>Resultado Final:</h1>
+                    <h2>XI: {{ x1 }}</h2>
+                    <h2>XII: {{ x2 }}</h2>
+                </div>
+                <button @click="calc" class="calc-action" id="calc-action" disabled>Calcular!</button>
+                <button @click="redo" class="redo-calc" v-if="showResult">Refazer Cálculo</button>
+            </div>
+        </div>
+        <div class="intro" id="intro">
+            <h1>{{ title }}</h1>
+            <h2>Tudo o que você precisa saber sobre a equação do segundo grau.</h2>
+            <p>Aqui vai uma breve explição da fórmula de bhaskara.</p>
+            <p><i>First things first</i>, equação do segundo grau é uma equação que tem a
+            forma baseada em <strong>ax² ± bx ± c = 0</strong>, onde <strong> 'a' deve ser diferente de 0
+            </strong> e <strong>a, b</strong> e <strong>c devem pertencer ao conjunto dos números reais</strong>. Este <i>modelo</i> para a fórmula é importante, pois é
+            a partir dele que usamos a fórumla de bhaskara. Conquanto sejam bem importantes, sua posição na equação pode mudar,
+            e deve-se estar atento para a correta identificação dos termos. <strong>A</strong> e <strong>B</strong> são chamados
+            <strong>coeficientes</strong> e <strong>C, termo independente</strong>, pois não multiplica nenhuma 
+            variável.</p>
+            <p>
+                <strong>A</strong> sempre multiplica a variável elevada ao quadrado, enquanto
+                <strong>B</strong> o faz somente na variável sem expoente. <strong>C</strong> sendo 
+                o termo independente, é o mais fácil de ser identificado, uma vez que não vem acompanhado 
+                de icógnita e é único na equação. Logo, na equação:
+            </p>
+            <span class="example">
+                -5 + 2x + 3x² = 0
+            </span>
+            <p>Temos:</p>
+            <ul class="explanation-list">
+                <li>A = 3</li>
+                <li>B = 2</li>
+                <li>C = -5</li>
+            </ul>
+            <p>Note que o X nunca vem junto.</p>
+            <p>Pode haver equações - em caso raros talvez-  em que não há presente nem o 
+            <strong>B ou C</strong>. Tais equações são chamadas de 
+            <strong>equações do segundo grau incompletas,</strong> e nelas não é necessário o uso de fórmula
+            de bhaskara.
+        </p>
+        <h1>As raízes</h1>
+        <h2>O valor de X</h2>
+        <p>As equações do segundo grau podem ter no máximo duas raízes, e é aí que
+            entra efetivamente a famosa fórmula de bhaskara, que as determina.
+            É também aqui que vê-se a importância de bem identificar os termos,
+            pois a precisão deles para o bom andamento do cálculo é sumamente importante. Ei-la:
+        </p>
+        <span class="example">Δ = b² - 4.a.c</span>
+        <span class="example">X = (-b ± √Δ) / 2.a</span>
+        <p>Perceba o ±. Em uma raíz teremos <strong>-b + √Δ</strong>e em outra
+        teremos <strong>-b + √Δ</strong>. Por isso, se o delta for 0, as raízes serão iguais,
+        uma vez que <strong>-b + 0 = -b - 0</strong>.</p>
+        <p>Dependendo do resultado do delta, podemos prever situações diferentes para as 
+            raízes do segundo grau:
+        </p>
+        <ul class="explanation-list">
+            <li>Δ > 0 => Equação possui duas raízes reais e diferente</li>
+            <li>Δ = 0 => Como visto, equação tem duas raízes reais e iguais.</li>
+            <li>Δ < 0 => Equação não possui raízes reais, senão que imaginárias. </li>
+        </ul>
+        </div>
+    </div>
+    <script src="js/vue.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
